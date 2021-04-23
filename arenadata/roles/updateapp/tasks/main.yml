@@ -1,0 +1,14 @@
+ - name: Send page
+   template:
+      src: index.html
+      dest: /usr/share/nginx/html/index.html
+      mode: 0755
+   become: yes
+   become_user: root
+
+ - name: Reload nginx
+   service:
+     name: nginx
+     state: reloaded
+   become: yes
+   become_user: root

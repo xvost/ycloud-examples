@@ -1,0 +1,17 @@
+ - name: Get VM's metadata
+   ycc_vm:
+     auth:
+       token: '{{ token }}'
+     name: '{{ name }}'
+     folder_id: '{{ folder_id }}'
+     operation: get_info
+   register: vmdata
+   delegate_to: localhost
+
+ - name: Get ip from metadata
+   set_fact:
+     ansible_host: "{{ vmdata.instance.networkInterfaces[0].primaryV4Address.oneToOneNat.address }}"
+     cacheable: yes
+
+ - name: Setup facts
+   setup:

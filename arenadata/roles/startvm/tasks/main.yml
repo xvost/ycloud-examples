@@ -1,0 +1,8 @@
+ - name: Start VM
+   ycc_vm:
+     auth:
+       token: '{{ token }}'
+     name: '{{ name }}'
+     folder_id: '{{ folder_id }}'
+     operation: start
+   delegate_to: localhost

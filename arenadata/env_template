@@ -1,0 +1,36 @@
+webservers:
+  hosts:
+    nginx1:
+      name: web1
+      ansible_user: user
+      cores: 4
+      ram: 4
+      boot_size: 20
+      boot_type: ssd
+      boot_name: web1
+      add_disk: yes
+      disk2_size: 120
+      disk2_name: web2-data
+      disk2_type: hdd
+      subnet: e9b****
+      image_id: fd8****
+    nginx2:
+      name: web2
+      ansible_user: user
+      cores: 2
+      ram: 2
+      boot_size: 20
+      boot_type: ssd
+      boot_name: web2
+      add_disk: yes
+      disk2_size: 120
+      disk2_name: web2-data
+      disk2_type: hdd
+      subnet: e9b****
+      image_id: fd8*****
+
+  vars:
+    ssh_key: ssh-rsa AAAA********
+    metadata: "#cloud-config\nusers:\n  - name: user\n    groups: sudo\n    shell: /bin/bash\n    sudo: ['ALL=(ALL) NOPASSWD:ALL']\n    ssh-authorized-keys:\n      - ssh-rsa AAAAB******"
+    folder_id: b1g*******
+    token: AgAAAAA***********

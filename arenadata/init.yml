@@ -1,0 +1,10 @@
+---
+ - hosts: webservers
+   gather_facts: False
+   pre_tasks:
+     - name:
+       include_role:
+         name: createvm
+   roles:
+     - installenv
+     - installapp

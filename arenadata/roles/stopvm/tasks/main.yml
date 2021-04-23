@@ -1,0 +1,8 @@
+ - name: Stop VM
+   ycc_vm:
+     auth:
+       token: '{{ token }}'
+     name: '{{ name }}'
+     folder_id: '{{ folder_id }}'
+     operation: stop
+   delegate_to: localhost

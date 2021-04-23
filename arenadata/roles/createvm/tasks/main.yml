@@ -1,0 +1,38 @@
+ - name: Create vm
+   ycc_vm:
+     auth:
+       token: '{{ token }}'
+     name: '{{ name }}'
+     login: '{{ ansible_user }}'
+     public_ssh_key: '{{ ssh_key }}'
+     hostname: '{{ name }}'
+     zone_id: ru-central1-a
+     folder_id: '{{ folder_id }}'
+     platform_id: "Intel Cascade Lake"
+     core_fraction: 100
+     cores: '{{ cores }}'
+     memory: '{{ ram }}'
+     image_id: '{{ image_id }}'
+     disk_type: '{{ boot_type }}'
+     disk_size: '{{ boot_size }}'
+     secondary_disks_spec:
+       - autodelete: true
+         description: '{{ disk2_name }}'
+         type: '{{ disk2_type }}'
+         size: '{{ disk2_size }}'
+     subnet_id: '{{ subnet }}'
+     assign_public_ip: true
+     preemptible: true
+#         metadata:
+#           user-data: "cloud init format in str"
+     state: present
+   delegate_to: localhost
+   register: vmdata
+
+ - name: Get ip from metadata at start
+   set_fact:
+     ansible_host: "{{ vmdata.response.networkInterfaces[0].primaryV4Address.oneToOneNat.address }}"
+     cacheable: yes
+
+ - name: Setup facts
+   setup:

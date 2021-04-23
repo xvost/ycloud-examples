@@ -1,0 +1,7 @@
+version: '3.7'
+services:
+  myapp:
+    container_name: myapp
+    image: cr.yandex/crp*******/myapp:2021-01-01
+    network_mode: 'host'
+    restart: always
